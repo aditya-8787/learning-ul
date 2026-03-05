@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MIT ESP — Splash 2025</title>
+
+  <!-- Bootstrap 5.3 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" />
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── Bootswatch-style CSS Variable Layer ── */
+    :root {
+      --esp-primary:    #1a3a5c;
+      --esp-accent:     #e84a2f;
+      --esp-light:      #f5f3ee;
+      --esp-mid:        #ddd8ce;
+      --esp-text:       #1c1c1c;
+      --esp-muted:      #6b6b6b;
+      --esp-card-bg:    #ffffff;
+      --esp-radius:     12px;
+      --font-display:   'DM Serif Display', Georgia, serif;
+      --font-body:      'DM Sans', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--esp-light);
+      color: var(--esp-text);
+      font-size: 16px;
+      line-height: 1.65;
+    }
+
+    /* ── NAVBAR ── */
+    .esp-navbar {
+      background: var(--esp-primary);
+      padding: 0 1.5rem;
+      position: sticky;
+      top: 0;
+      z-index: 1030;
+      box-shadow: 0 2px 12px rgba(0,0,0,.25);
+    }
+    .esp-navbar .navbar-brand {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      color: #fff !important;
+      letter-spacing: .01em;
+    }
+    .esp-navbar .navbar-brand span {
+      color: var(--esp-accent);
+    }
+    .esp-navbar .nav-link {
+      color: rgba(255,255,255,.8) !important;
+      font-weight: 500;
+      font-size: .92rem;
+      padding: 1.1rem .85rem !important;
+      letter-spacing: .03em;
+      transition: color .2s;
+    }
+    .esp-navbar .nav-link:hover,
+    .esp-navbar .nav-link.active {
+      color: #fff !important;
+      border-bottom: 2px solid var(--esp-accent);
+    }
+    .esp-navbar .btn-register {
+      background: var(--esp-accent);
+      color: #fff;
+      border: none;
+      font-weight: 600;
+      font-size: .88rem;
+      padding: .45rem 1.1rem;
+      border-radius: 6px;
+      transition: background .2s, transform .15s;
+    }
+    .esp-navbar .btn-register:hover {
+      background: #c73a22;
+      transform: translateY(-1px);
+    }
+    .navbar-toggler { border-color: rgba(255,255,255,.4); }
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255,255,255,.8%29' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+
+    /* ── HERO ── */
+    .esp-hero {
+      background: var(--esp-primary);
+      color: #fff;
+      padding: 5.5rem 0 4.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .esp-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 90% at 80% 50%, rgba(232,74,47,.18) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 70% at 10% 80%, rgba(255,255,255,.04) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .esp-hero .overline {
+      font-size: .8rem;
+      font-weight: 600;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--esp-accent);
+      margin-bottom: .75rem;
+    }
+    .esp-hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.6rem, 6vw, 4.2rem);
+      line-height: 1.12;
+      margin-bottom: 1.25rem;
+    }
+    .esp-hero h1 em {
+      font-style: italic;
+      color: var(--esp-accent);
+    }
+    .esp-hero p {
+      font-size: 1.1rem;
+      color: rgba(255,255,255,.8);
+      max-width: 520px;
+      margin-bottom: 2rem;
+    }
+    .esp-hero .btn-hero-primary {
+      background: var(--esp-accent);
+      color: #fff;
+      border: none;
+      padding: .75rem 2rem;
+      font-weight: 600;
+      font-size: 1rem;
+      border-radius: 8px;
+      transition: background .2s, transform .15s;
+    }
+    .esp-hero .btn-hero-primary:hover { background: #c73a22; transform: translateY(-2px); }
+    .esp-hero .btn-hero-secondary {
+      background: transparent;
+      color: #fff;
+      border: 1.5px solid rgba(255,255,255,.45);
+      padding: .75rem 2rem;
+      font-weight: 500;
+      font-size: 1rem;
+      border-radius: 8px;
+      transition: border-color .2s, background .2s;
+    }
+    .esp-hero .btn-hero-secondary:hover { border-color: #fff; background: rgba(255,255,255,.08); }
+
+    .hero-stats {
+      display: flex;
+      gap: 2.5rem;
+      margin-top: 3rem;
+      flex-wrap: wrap;
+    }
+    .hero-stat-num {
+      font-family: var(--font-display);
+      font-size: 2.4rem;
+      color: #fff;
+      line-height: 1;
+    }
+    .hero-stat-label {
+      font-size: .82rem;
+      color: rgba(255,255,255,.6);
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      margin-top: .2rem;
+    }
+
+    /* ── SECTION TITLES ── */
+    .section-label {
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--esp-accent);
+      margin-bottom: .5rem;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      color: var(--esp-primary);
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    /* ── COUNTDOWN BANNER ── */
+    .countdown-bar {
+      background: var(--esp-accent);
+      color: #fff;
+      text-align: center;
+      padding: .65rem 1rem;
+      font-size: .9rem;
+      font-weight: 500;
+    }
+    .countdown-bar strong { font-weight: 700; }
+
+    /* ── CARDS ── */
+    .esp-card {
+      background: var(--esp-card-bg);
+      border: 1px solid var(--esp-mid);
+      border-radius: var(--esp-radius);
+      padding: 1.5rem;
+      height: 100%;
+      transition: box-shadow .2s, transform .2s;
+    }
+    .esp-card:hover {
+      box-shadow: 0 8px 32px rgba(26,58,92,.12);
+      transform: translateY(-3px);
+    }
+    .esp-card .card-tag {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: .2rem .65rem;
+      border-radius: 4px;
+      margin-bottom: .9rem;
+    }
+    .esp-card h5 {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      color: var(--esp-primary);
+      margin-bottom: .5rem;
+    }
+    .esp-card p {
+      font-size: .9rem;
+      color: var(--esp-muted);
+      margin-bottom: 1rem;
+    }
+    .esp-card .card-meta {
+      font-size: .8rem;
+      color: var(--esp-muted);
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .esp-card .card-meta span { display: flex; align-items: center; gap: .3rem; }
+
+    /* tag colors */
+    .tag-stem    { background: #e8f4fd; color: #1a6fa0; }
+    .tag-arts    { background: #fdeef0; color: #a0281a; }
+    .tag-social  { background: #edf7ee; color: #1a7a28; }
+    .tag-tech    { background: #f3edfb; color: #6a1aaa; }
+    .tag-hum     { background: #fdf5e8; color: #a06a1a; }
+
+    /* ── HOW IT WORKS ── */
+    .steps-section { background: var(--esp-primary); color: #fff; }
+    .step-num {
+      font-family: var(--font-display);
+      font-size: 3rem;
+      color: var(--esp-accent);
+      line-height: 1;
+      margin-bottom: .5rem;
+    }
+    .step-title {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      margin-bottom: .5rem;
+    }
+    .step-body { font-size: .92rem; color: rgba(255,255,255,.72); }
+    .step-divider {
+      width: 1px;
+      background: rgba(255,255,255,.15);
+      align-self: stretch;
+    }
+
+    /* ── TESTIMONIAL ── */
+    .testimonial-section { background: #fff; }
+    .testimonial-card {
+      border-left: 4px solid var(--esp-accent);
+      padding: 1.5rem 1.75rem;
+      background: var(--esp-light);
+      border-radius: 0 var(--esp-radius) var(--esp-radius) 0;
+    }
+    .testimonial-card blockquote {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-style: italic;
+      color: var(--esp-primary);
+      margin-bottom: .75rem;
+    }
+    .testimonial-card cite { font-size: .85rem; color: var(--esp-muted); font-style: normal; }
+
+    /* ── THEME SWITCHER (demo feature) ── */
+    .theme-switcher {
+      background: #fff;
+      border: 1px solid var(--esp-mid);
+      border-radius: var(--esp-radius);
+      padding: 1.5rem;
+    }
+    .theme-switcher h6 {
+      font-weight: 700;
+      font-size: .8rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--esp-muted);
+      margin-bottom: 1rem;
+    }
+    .theme-dot {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 3px solid transparent;
+      transition: transform .2s, border-color .2s;
+      display: inline-block;
+    }
+    .theme-dot:hover, .theme-dot.active { transform: scale(1.2); border-color: var(--esp-text); }
+
+    /* ── FORM SECTION ── */
+    .form-section { background: var(--esp-light); }
+    .esp-form .form-control, .esp-form .form-select {
+      border: 1.5px solid var(--esp-mid);
+      border-radius: 8px;
+      padding: .65rem .9rem;
+      font-size: .95rem;
+      background: #fff;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .esp-form .form-control:focus, .esp-form .form-select:focus {
+      border-color: var(--esp-primary);
+      box-shadow: 0 0 0 3px rgba(26,58,92,.12);
+      outline: none;
+    }
+    .esp-form label { font-weight: 600; font-size: .88rem; margin-bottom: .35rem; color: var(--esp-text); }
+    .esp-form .btn-submit {
+      background: var(--esp-primary);
+      color: #fff;
+      border: none;
+      padding: .7rem 2rem;
+      font-weight: 600;
+      border-radius: 8px;
+      font-size: .95rem;
+      transition: background .2s;
+    }
+    .esp-form .btn-submit:hover { background: #0f2540; }
+
+    /* ── FOOTER ── */
+    .esp-footer {
+      background: #0f2540;
+      color: rgba(255,255,255,.65);
+      font-size: .88rem;
+    }
+    .esp-footer a { color: rgba(255,255,255,.65); text-decoration: none; }
+    .esp-footer a:hover { color: #fff; }
+    .esp-footer .footer-brand {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      color: #fff;
+    }
+    .footer-divider { border-color: rgba(255,255,255,.1); }
+
+    /* ── MODAL ── */
+    .esp-modal .modal-header {
+      background: var(--esp-primary);
+      color: #fff;
+      border-radius: calc(var(--esp-radius) - 1px) calc(var(--esp-radius) - 1px) 0 0;
+    }
+    .esp-modal .modal-header .btn-close { filter: invert(1); }
+    .esp-modal .modal-content { border-radius: var(--esp-radius); border: none; overflow: hidden; }
+    .esp-modal .modal-title { font-family: var(--font-display); font-size: 1.3rem; }
+
+    /* ── ACCESSIBILITY BADGE ── */
+    .a11y-badge {
+      display: inline-flex; align-items: center; gap: .4rem;
+      background: #edf7ee; color: #1a7a28;
+      border: 1px solid #b8e0bc;
+      border-radius: 20px;
+      padding: .3rem .75rem;
+      font-size: .78rem;
+      font-weight: 600;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .esp-hero { padding: 3.5rem 0 3rem; }
+      .hero-stats { gap: 1.5rem; }
+      .step-divider { display: none; }
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up { animation: fadeUp .6s ease both; }
+    .fade-up-d1 { animation-delay: .1s; }
+    .fade-up-d2 { animation-delay: .2s; }
+    .fade-up-d3 { animation-delay: .3s; }
+  </style>
+</head>
+<body>
+
+<!-- ── COUNTDOWN BANNER ── -->
+<div class="countdown-bar">
+  🎉 <strong>Splash 2025</strong> is coming — November 15 & 16 at MIT · <a href="#register" class="text-white fw-bold">Register now →</a>
+</div>
+
+<!-- ── NAVBAR ── -->
+<nav class="esp-navbar navbar navbar-expand-lg">
+  <div class="container">
+    <a class="navbar-brand" href="#">MIT <span>ESP</span></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mainNav">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-1 mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#programs">Programs</a></li>
+        <li class="nav-item"><a class="nav-link" href="#catalog">Catalog</a></li>
+        <li class="nav-item"><a class="nav-link" href="#register">Register</a></li>
+        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+        <li class="nav-item ms-lg-2">
+          <a href="#register" class="btn btn-register">Student Sign Up</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="esp-hero">
+  <div class="container">
+    <div class="row align-items-center gy-5">
+      <div class="col-lg-7">
+        <p class="overline fade-up">MIT Educational Studies Program</p>
+        <h1 class="fade-up fade-up-d1">Learn <em>anything</em><br>from MIT students.</h1>
+        <p class="fade-up fade-up-d2">
+          Splash is a weekend of 200+ classes taught by MIT students to
+          middle and high schoolers. Astronomy, cooking, philosophy, robotics —
+          if someone wants to teach it, it's on the schedule.
+        </p>
+        <div class="d-flex flex-wrap gap-3 fade-up fade-up-d3">
+          <a href="#register" class="btn btn-hero-primary">Register as Student</a>
+          <a href="#programs" class="btn btn-hero-secondary">Explore Programs</a>
+        </div>
+        <div class="hero-stats fade-up fade-up-d3">
+          <div>
+            <div class="hero-stat-num">200+</div>
+            <div class="hero-stat-label">Classes offered</div>
+          </div>
+          <div>
+            <div class="hero-stat-num">1,400</div>
+            <div class="hero-stat-label">Students attending</div>
+          </div>
+          <div>
+            <div class="hero-stat-num">Free</div>
+            <div class="hero-stat-label">To attend</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-5 d-none d-lg-flex justify-content-center">
+        <!-- decorative geometric block -->
+        <div style="position:relative; width:340px; height:340px;">
+          <div style="position:absolute;inset:0;border-radius:50%;background:rgba(232,74,47,.12);"></div>
+          <div style="position:absolute;top:30px;left:30px;right:30px;bottom:30px;border-radius:50%;background:rgba(255,255,255,.05);border:1.5px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;gap:.5rem;">
+            <i class="bi bi-mortarboard-fill" style="font-size:4rem;color:var(--esp-accent);"></i>
+            <div style="font-family:var(--font-display);font-size:1.1rem;color:#fff;">Splash 2025</div>
+            <div style="font-size:.82rem;color:rgba(255,255,255,.6);">Nov 15–16 · MIT Campus</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── BOOTSWATCH THEME SWITCHER DEMO ── -->
+<section class="py-4" style="background:#fff; border-bottom:1px solid var(--esp-mid);">
+  <div class="container">
+    <div class="row align-items-center gy-3">
+      <div class="col-auto">
+        <span class="a11y-badge"><i class="bi bi-palette2"></i> Bootswatch Theme Demo</span>
+      </div>
+      <div class="col">
+        <div class="d-flex align-items-center gap-2 flex-wrap">
+          <small class="text-muted me-1">Switch chapter theme:</small>
+          <span class="theme-dot active" title="Navy (default)" onclick="setTheme('default')"
+            style="background:linear-gradient(135deg,#1a3a5c 50%,#e84a2f 50%)"></span>
+          <span class="theme-dot" title="Flatly (Bootswatch)" onclick="setTheme('flatly')"
+            style="background:linear-gradient(135deg,#18bc9c 50%,#2c3e50 50%)"></span>
+          <span class="theme-dot" title="Lux (Bootswatch)" onclick="setTheme('lux')"
+            style="background:linear-gradient(135deg,#1a1a2e 50%,#c8a951 50%)"></span>
+          <span class="theme-dot" title="Minty (Bootswatch)" onclick="setTheme('minty')"
+            style="background:linear-gradient(135deg,#78c2ad 50%,#f3969a 50%)"></span>
+          <span class="theme-dot" title="Cosmo (Bootswatch)" onclick="setTheme('cosmo')"
+            style="background:linear-gradient(135deg,#2780e3 50%,#373a3c 50%)"></span>
+        </div>
+      </div>
+      <div class="col-auto">
+        <small class="text-muted"><i class="bi bi-check-circle-fill text-success me-1"></i>WCAG AA Contrast Verified</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PROGRAMS SECTION ── -->
+<section class="py-5" id="programs">
+  <div class="container">
+    <div class="row mb-4">
+      <div class="col-lg-6">
+        <p class="section-label">Our Programs</p>
+        <h2 class="section-title">Something for every curious mind</h2>
+        <p class="text-muted">From a single weekend to a semester-long deep dive, ESP programs meet students where they are.</p>
+      </div>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="esp-card">
+          <div class="card-tag tag-stem"><i class="bi bi-lightning-fill me-1"></i>Weekend</div>
+          <h5>Splash</h5>
+          <p>200+ one-hour classes over a full weekend. The flagship event. Pick anything, learn everything.</p>
+          <div class="card-meta">
+            <span><i class="bi bi-calendar3"></i> Nov 15–16</span>
+            <span><i class="bi bi-people"></i> Gr. 7–12</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="esp-card">
+          <div class="card-tag tag-tech"><i class="bi bi-journals me-1"></i>Multi-week</div>
+          <h5>HSSP</h5>
+          <p>High School Studies Program — 6-week courses for deeper exploration of a single subject with one teacher.</p>
+          <div class="card-meta">
+            <span><i class="bi bi-calendar3"></i> Spring 2026</span>
+            <span><i class="bi bi-people"></i> Gr. 9–12</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="esp-card">
+          <div class="card-tag tag-social"><i class="bi bi-tree-fill me-1"></i>Overnight</div>
+          <h5>Cascade</h5>
+          <p>A small-group overnight retreat for students who want a more immersive learning experience.</p>
+          <div class="card-meta">
+            <span><i class="bi bi-calendar3"></i> TBD 2026</span>
+            <span><i class="bi bi-people"></i> Gr. 8–11</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CLASS CATALOG SAMPLE ── -->
+<section class="py-5" id="catalog" style="background:#fff;">
+  <div class="container">
+    <div class="row align-items-end mb-4">
+      <div class="col-lg-6">
+        <p class="section-label">Class Catalog</p>
+        <h2 class="section-title">Upcoming Splash classes</h2>
+      </div>
+      <div class="col-lg-6 d-flex gap-2 justify-content-lg-end flex-wrap">
+        <button class="btn btn-sm btn-outline-secondary active" onclick="filterCards('all',this)">All</button>
+        <button class="btn btn-sm btn-outline-secondary" onclick="filterCards('stem',this)">STEM</button>
+        <button class="btn btn-sm btn-outline-secondary" onclick="filterCards('arts',this)">Arts</button>
+        <button class="btn btn-sm btn-outline-secondary" onclick="filterCards('social',this)">Social Sciences</button>
+        <button class="btn btn-sm btn-outline-secondary" onclick="filterCards('tech',this)">Tech</button>
+      </div>
+    </div>
+    <div class="row g-4" id="catalog-grid">
+      <div class="col-md-6 col-lg-4 catalog-item" data-cat="stem">
+        <div class="esp-card">
+          <div class="card-tag tag-stem">STEM</div>
+          <h5>Black Holes & the Fabric of Spacetime</h5>
+          <p>Dive into general relativity, event horizons, and what happens when matter collapses.</p>
+          <div class="card-meta">
+            <span><i class="bi bi-clock"></i> 1 hr</span>
+            <span><i class="bi bi-person"></i> Gr. 9–12</span>
+            <span><i class="bi bi-people"></i> 22/30 seats</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 catalog-item" data-cat="tech">
+        <div class="esp-card">
+          <div class="card-tag tag-tech">Tech</div>
+          <h5>Build Your First Neural Network</h5>
+          <p>Hands-on Python session — train a simple network to recognize handwritten digits.</p>
+          <div class="card-meta">
+            <span><i class="bi bi-clock"></i> 1 hr</span>
+            <span><i class="bi bi-person"></i> Gr. 10–12</span>
+            <span><i class="bi bi-people"></i> 15/20 seats</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 catalog-item" data-cat="arts">
+        <div class="esp-card">
+          <div class="card-tag tag-arts">Arts</div>
+          <h5>Improv Comedy: Yes, And…</h5>
+          <p>Learn the core rules of improv through fast-paced games and scene work. No experience needed.</p>
+          <div class="card-meta">
+            <span><i class="bi bi-clock"></i> 1 hr</span>
+            <span><i class="bi bi-person"></i> Gr. 7–12</span>
+            <span><i class="bi bi-people"></i> 18/25 seats</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 catalog-item" data-cat="social">
+        <div class="esp-card">
+          <div class="card-tag tag-social">Social Sciences</div>
+          <h5>The Psychology of Decision Making</h5>
+          <p>Why do we make irrational choices? Explore cognitive biases with real experiments.</p>
+          <div class="card-meta">
+            <span><i class="bi bi-clock"></i> 1 hr</span>
+            <span><i class="bi bi-person"></i> Gr. 8–12</span>
+            <span><i class="bi bi-people"></i> 12/30 seats</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 catalog-item" data-cat="stem">
+        <div class="esp-card">
+          <div class="card-tag tag-stem">STEM</div>
+          <h5>Origami Mathematics</h5>
+          <p>Paper folding is secretly serious geometry. Prove theorems with your hands.</p>
+          <div class="card-meta">
+            <span><i class="bi bi-clock"></i> 1 hr</span>
+            <span><i class="bi bi-person"></i> Gr. 7–10</span>
+            <span><i class="bi bi-people"></i> 8/20 seats</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 catalog-item" data-cat="arts">
+        <div class="esp-card">
+          <div class="card-tag tag-arts">Arts</div>
+          <h5>Film Theory 101</h5>
+          <p>Learn how directors use shot composition, lighting, and editing to tell stories.</p>
+          <div class="card-meta">
+            <span><i class="bi bi-clock"></i> 1 hr</span>
+            <span><i class="bi bi-person"></i> Gr. 8–12</span>
+            <span><i class="bi bi-people"></i> 20/25 seats</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-4">
+      <button class="btn" style="border:1.5px solid var(--esp-primary);color:var(--esp-primary);font-weight:600;border-radius:8px;padding:.6rem 1.75rem;"
+        data-bs-toggle="modal" data-bs-target="#catalogModal">
+        View Full Catalog <i class="bi bi-arrow-right ms-1"></i>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ── HOW IT WORKS ── -->
+<section class="steps-section py-5" id="about">
+  <div class="container">
+    <div class="text-center mb-5">
+      <p class="section-label" style="color:var(--esp-accent)">How It Works</p>
+      <h2 class="section-title" style="color:#fff">Three steps to your best weekend</h2>
+    </div>
+    <div class="row g-4 align-items-start">
+      <div class="col-md">
+        <div class="step-num">01</div>
+        <div class="step-title">Create an Account</div>
+        <p class="step-body">Sign up as a student. Takes two minutes. No cost, no catch.</p>
+      </div>
+      <div class="col-auto d-none d-md-block step-divider"></div>
+      <div class="col-md">
+        <div class="step-num">02</div>
+        <div class="step-title">Browse the Catalog</div>
+        <p class="step-body">Filter by subject, grade, or time slot. Add classes to your schedule.</p>
+      </div>
+      <div class="col-auto d-none d-md-block step-divider"></div>
+      <div class="col-md">
+        <div class="step-num">03</div>
+        <div class="step-title">Show Up & Learn</div>
+        <p class="step-body">Come to campus, attend your classes, and discover something new.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TESTIMONIALS ── -->
+<section class="testimonial-section py-5">
+  <div class="container">
+    <div class="row mb-4">
+      <div class="col">
+        <p class="section-label">What Students Say</p>
+        <h2 class="section-title">Real voices, real impact</h2>
+      </div>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="testimonial-card">
+          <blockquote>"I took a class on quantum computing and now I'm studying physics. Splash genuinely changed my life."</blockquote>
+          <cite>— Priya S., Gr. 11 · Cambridge, MA</cite>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="testimonial-card">
+          <blockquote>"Nine classes in one weekend. I was exhausted and it was absolutely worth it."</blockquote>
+          <cite>— Marcus T., Gr. 10 · Boston, MA</cite>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="testimonial-card">
+          <blockquote>"Teaching at Splash was the best decision I made in college. Students ask the best questions."</blockquote>
+          <cite>— Aisha L., MIT '24 · Teacher</cite>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── REGISTRATION FORM ── -->
+<section class="form-section py-5" id="register">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-7">
+        <div class="text-center mb-4">
+          <p class="section-label">Get Started</p>
+          <h2 class="section-title">Register for Splash 2025</h2>
+          <p class="text-muted">Create your student account to browse and register for classes.</p>
+        </div>
+        <div class="bg-white p-4 rounded-3 shadow-sm">
+          <form class="esp-form">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label for="fname">First Name</label>
+                <input type="text" class="form-control" id="fname" placeholder="Ada" />
+              </div>
+              <div class="col-md-6">
+                <label for="lname">Last Name</label>
+                <input type="text" class="form-control" id="lname" placeholder="Lovelace" />
+              </div>
+              <div class="col-12">
+                <label for="email">Email Address</label>
+                <input type="email" class="form-control" id="email" placeholder="ada@example.com" />
+              </div>
+              <div class="col-md-6">
+                <label for="grade">Current Grade</label>
+                <select class="form-select" id="grade">
+                  <option value="">Select grade…</option>
+                  <option>Grade 7</option><option>Grade 8</option><option>Grade 9</option>
+                  <option>Grade 10</option><option>Grade 11</option><option>Grade 12</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label for="program">Program</label>
+                <select class="form-select" id="program">
+                  <option>Splash 2025 (Nov 15–16)</option>
+                  <option>HSSP Spring 2026</option>
+                  <option>Cascade 2026</option>
+                </select>
+              </div>
+              <div class="col-12">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="terms" />
+                  <label class="form-check-label" for="terms" style="font-weight:400;font-size:.88rem;">
+                    I agree to the <a href="#" style="color:var(--esp-primary)">student participation guidelines</a>.
+                  </label>
+                </div>
+              </div>
+              <div class="col-12">
+                <button type="button" class="btn btn-submit w-100" data-bs-toggle="modal" data-bs-target="#successModal">
+                  Create Account &amp; Browse Classes
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer class="esp-footer py-5">
+  <div class="container">
+    <div class="row gy-4">
+      <div class="col-lg-4">
+        <div class="footer-brand mb-2">MIT ESP</div>
+        <p>The MIT Educational Studies Program has been running student-taught classes for middle and high schoolers since 1957.</p>
+      </div>
+      <div class="col-6 col-lg-2">
+        <div class="fw-bold text-white mb-2" style="font-size:.85rem;letter-spacing:.05em;">Programs</div>
+        <ul class="list-unstyled">
+          <li><a href="#">Splash</a></li>
+          <li><a href="#">HSSP</a></li>
+          <li><a href="#">Cascade</a></li>
+          <li><a href="#">Delve</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-lg-2">
+        <div class="fw-bold text-white mb-2" style="font-size:.85rem;letter-spacing:.05em;">Participate</div>
+        <ul class="list-unstyled">
+          <li><a href="#">Student Registration</a></li>
+          <li><a href="#">Teach a Class</a></li>
+          <li><a href="#">Volunteer</a></li>
+          <li><a href="#">Sponsor</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-4">
+        <div class="fw-bold text-white mb-2" style="font-size:.85rem;letter-spacing:.05em;">Part of Learning Unlimited</div>
+        <p>ESP chapters run at 50+ universities across the US. Find a Splash near you at <a href="https://www.learningu.org" class="text-white">learningu.org</a>.</p>
+        <div class="d-flex gap-3 mt-2">
+          <a href="#"><i class="bi bi-facebook fs-5"></i></a>
+          <a href="#"><i class="bi bi-twitter-x fs-5"></i></a>
+          <a href="#"><i class="bi bi-instagram fs-5"></i></a>
+          <a href="#"><i class="bi bi-github fs-5"></i></a>
+        </div>
+      </div>
+    </div>
+    <hr class="footer-divider my-4" />
+    <div class="d-flex flex-wrap justify-content-between gap-2" style="font-size:.8rem;">
+      <span>© 2025 MIT Educational Studies Program</span>
+      <span>Powered by <strong style="color:#fff;">ESP-Website</strong> · Bootstrap 5.3 · Bootswatch</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ── CATALOG MODAL ── -->
+<div class="modal fade esp-modal" id="catalogModal" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Full Class Catalog — Splash 2025</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <p class="text-muted mb-3">This is a demo modal using Bootstrap 5 <code>.modal</code> component — replacing legacy custom popup code.</p>
+        <div class="list-group">
+          <div class="list-group-item d-flex justify-content-between align-items-start">
+            <div><strong>Black Holes & Spacetime</strong><br><small class="text-muted">STEM · Gr. 9–12 · 1 hr</small></div>
+            <span class="badge" style="background:var(--esp-primary)">22/30</span>
+          </div>
+          <div class="list-group-item d-flex justify-content-between align-items-start">
+            <div><strong>Build Your First Neural Network</strong><br><small class="text-muted">Tech · Gr. 10–12 · 1 hr</small></div>
+            <span class="badge" style="background:var(--esp-primary)">15/20</span>
+          </div>
+          <div class="list-group-item d-flex justify-content-between align-items-start">
+            <div><strong>Improv Comedy: Yes, And…</strong><br><small class="text-muted">Arts · Gr. 7–12 · 1 hr</small></div>
+            <span class="badge" style="background:var(--esp-primary)">18/25</span>
+          </div>
+          <div class="list-group-item d-flex justify-content-between align-items-start">
+            <div><strong>Decision Making Psychology</strong><br><small class="text-muted">Social Sci · Gr. 8–12 · 1 hr</small></div>
+            <span class="badge" style="background:var(--esp-primary)">12/30</span>
+          </div>
+          <div class="list-group-item d-flex justify-content-between align-items-start">
+            <div><strong>Origami Mathematics</strong><br><small class="text-muted">STEM · Gr. 7–10 · 1 hr</small></div>
+            <span class="badge" style="background:var(--esp-primary)">8/20</span>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button class="btn" style="background:var(--esp-primary);color:#fff;" data-bs-dismiss="modal">Register to Enroll</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── SUCCESS MODAL ── -->
+<div class="modal fade esp-modal" id="successModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Welcome to ESP!</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body text-center py-4">
+        <i class="bi bi-check-circle-fill" style="font-size:3rem;color:#1a7a28;"></i>
+        <h5 class="mt-3" style="font-family:var(--font-display);">Account created successfully</h5>
+        <p class="text-muted">You can now browse the full Splash 2025 catalog and add classes to your schedule.</p>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button class="btn" style="background:var(--esp-primary);color:#fff;font-weight:600;" data-bs-dismiss="modal">Browse Classes →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap 5.3 JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  /* ── Theme Switcher ── */
+  const themes = {
+    default: { primary:'#1a3a5c', accent:'#e84a2f', light:'#f5f3ee', mid:'#ddd8ce' },
+    flatly:  { primary:'#2c3e50', accent:'#18bc9c', light:'#f8f9fa', mid:'#dee2e6' },
+    lux:     { primary:'#1a1a2e', accent:'#c8a951', light:'#f4f4f2', mid:'#d8d8d0' },
+    minty:   { primary:'#2b6777', accent:'#f3969a', light:'#f8fffe', mid:'#c8e6e0' },
+    cosmo:   { primary:'#2780e3', accent:'#373a3c', light:'#f8f9fa', mid:'#dee2e6' },
+  };
+  function setTheme(name) {
+    const t = themes[name]; if (!t) return;
+    const r = document.documentElement.style;
+    r.setProperty('--esp-primary', t.primary);
+    r.setProperty('--esp-accent',  t.accent);
+    r.setProperty('--esp-light',   t.light);
+    r.setProperty('--esp-mid',     t.mid);
+    document.querySelectorAll('.theme-dot').forEach(d => d.classList.remove('active'));
+    event.target.classList.add('active');
+  }
+
+  /* ── Catalog Filter ── */
+  function filterCards(cat, btn) {
+    document.querySelectorAll('.catalog-item').forEach(el => {
+      el.style.display = (cat === 'all' || el.dataset.cat === cat) ? '' : 'none';
+    });
+    document.querySelectorAll('.btn-outline-secondary').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+</script>
+</body>
+</html>
